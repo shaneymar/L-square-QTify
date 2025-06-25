@@ -1,40 +1,35 @@
 .card {
-  width: 210px;
+  width: 220px;
+  border-radius: 8px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap:10px;
-  /* align-items: center; */
-  font-family: var(--font-main);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .imageWrapper {
   position: relative;
-  width: 100%;
-  background-color: var(--color-white);
-  border-radius: 12px;
+  background-color: #ffffff;
+  border-radius: 8px;
 }
 
 .image {
   width: 100%;
-  border-radius: 12px 12px 0 0;
   display: block;
 }
 
-.chip {
-  background-color: black !important;
-  color: white !important;
-  font-size: 12px;
-  margin: 10px;
-  height: 32px;
-  font-family: var(--font-main);
+.chipWrapper {
+  /* position: absolute;
+  bottom: 8px;
+  left: 8px; */
+  margin:4px;
+  padding-bottom: 10px;
 }
 
-.title{
-  margin: 8px 0;
+.title {
+  padding: 8px;
   font-size: 14px;
   font-weight: 500;
-  color:var(--color-white);
-  text-align: left !important;
-  font-family: var(--font-main);
+  white-space: nowrap;
+  color: var(--color-white);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

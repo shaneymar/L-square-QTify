@@ -1,42 +1,49 @@
+// src/components/Section/Section.jsx
 import React, { useEffect, useState } from "react";
 import Card from "../Card/Card";
+import Carousel from "../Carousel/Carousel";
 import styles from "./Section.module.css";
 
 function Section({ title, fetchUrl }) {
-  const [items, setItems] = useState([]);
+  const [albums, setAlbums] = useState([]);
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchAlbums = async () => {
       try {
         const res = await fetch(fetchUrl);
-        if (!res.ok) throw new Error(`HTTP Error ${res.status}`);
+        if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
         const data = await res.json();
-        setItems(data);
+        setAlbums(data);
       } catch (err) {
-        console.error("Error fetching data:", err.message);
+        console.error("Failed to fetch albums:", err);
       }
     };
-
-    fetchData();
+    fetchAlbums();
   }, [fetchUrl]);
 
-  const visibleItems = showAll ? items : items.slice(0, 5);
+  const visibleAlbums = showAll ? albums : albums.slice(0, 5);
 
   return (
     <div className={styles.section}>
       <div className={styles.header}>
         <h3>{title}</h3>
-        {items.length > 5 && (
-          <button onClick={() => setShowAll(!showAll)} className={styles.toggle}>
+        {albums.length > 5 && (
+          <button className={styles.toggle} onClick={() => setShowAll(!showAll)}>
             {showAll ? "Collapse" : "Show All"}
           </button>
         )}
       </div>
-      <div className={styles.cardGrid}>
-        {visibleItems.map((item) => (
-          <Card key={item.id} album={item} />
-        ))}
+      <div className={styles.content}>
+        {showAll ? (
+          <Carousel data={albums} />
+        ) : (
+          <div className={styles.cardGrid}>
+            {visibleAlbums.map((album) => (
+              <Card key={album.id} album={album} />
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

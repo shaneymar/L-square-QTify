@@ -1,0 +1,43 @@
+.carouselWrapper {
+  position: relative;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.swiperContainer {
+  padding: 8px 32px; /* adds spacing left and right */
+}
+
+.swiperSlide {
+  display: flex;
+  justify-content: center;
+}
+
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.leftButton {
+  left: 0;
+}
+
+.rightButton {
+  right: 0;
+}
+
+.navButton img {
+  width: 32px;
+  height: 32px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.navButton:hover img {
+  opacity: 1;
+}
