@@ -22,24 +22,23 @@ function Section({ title, fetchUrl }) {
     fetchAlbums();
   }, [fetchUrl]);
 
-  const visibleAlbums = showAll ? albums : albums.slice(0, 5);
-
   return (
     <div className={styles.section}>
       <div className={styles.header}>
         <h3>{title}</h3>
-        {albums.length > 5 && (
+        {albums.length > 0 && (
           <button className={styles.toggle} onClick={() => setShowAll(!showAll)}>
             {showAll ? "Collapse" : "Show All"}
           </button>
         )}
       </div>
+
       <div className={styles.content}>
         {showAll ? (
           <Carousel data={albums} />
         ) : (
           <div className={styles.cardGrid}>
-            {visibleAlbums.map((album) => (
+            {albums.map((album) => (
               <Card key={album.id} album={album} />
             ))}
           </div>
