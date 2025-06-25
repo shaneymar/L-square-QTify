@@ -1,0 +1,29 @@
+.section {
+  padding: 24px;
+  background-color: var(--color-black);
+  font-family: var(--font-main);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-white);
+  font-family: var(--font-main);
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.toggleButton{
+    background:transparent;
+    border:none;
+    cursor: pointer;
+    font-size: 17px;
+    font-family: var(--font-main);
+    color: var(--color-green);
+}
