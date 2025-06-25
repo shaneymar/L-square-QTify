@@ -15,6 +15,10 @@ function App() {
         title="New Albums"
         fetchUrl="https://qtify-backend-labs.crio.do/albums/new"
       />
+       <Section
+        title="Songs"
+        fetchUrl="https://qtify-backend-labs.crio.do/songs"
+      />
     </div>
   );
 }

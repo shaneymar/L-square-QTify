@@ -1,42 +1,41 @@
-// src/components/Section/Section.jsx
 import React, { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import styles from "./Section.module.css";
 
 function Section({ title, fetchUrl }) {
-  const [albums, setAlbums] = useState([]);
+  const [items, setItems] = useState([]);
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    const fetchAlbums = async () => {
+    const fetchData = async () => {
       try {
         const res = await fetch(fetchUrl);
         if (!res.ok) throw new Error(`HTTP Error ${res.status}`);
         const data = await res.json();
-        setAlbums(data);
+        setItems(data);
       } catch (err) {
-        console.error("Error fetching albums:", err.message);
+        console.error("Error fetching data:", err.message);
       }
     };
 
-    fetchAlbums();
+    fetchData();
   }, [fetchUrl]);
 
-  const visibleAlbums = showAll ? albums : albums.slice(0, 5);
+  const visibleItems = showAll ? items : items.slice(0, 5);
 
   return (
     <div className={styles.section}>
       <div className={styles.header}>
         <h3>{title}</h3>
-        {albums.length > 5 && (
+        {items.length > 5 && (
           <button onClick={() => setShowAll(!showAll)} className={styles.toggle}>
             {showAll ? "Collapse" : "Show All"}
           </button>
         )}
       </div>
       <div className={styles.cardGrid}>
-        {visibleAlbums.map((album) => (
-          <Card key={album.id} album={album} />
+        {visibleItems.map((item) => (
+          <Card key={item.id} album={item} />
         ))}
       </div>
     </div>

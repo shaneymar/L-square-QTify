@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./Card.module.css";
 import Chip from "@mui/material/Chip";
-//import { shadows } from "@mui/system";
 
 function Card({ album }) {
   const { title, image, follows } = album;
@@ -11,7 +10,9 @@ function Card({ album }) {
       <div className={styles.imageWrapper}>
         <img src={image} alt={title} className={styles.image} />
         <div className={styles.chipWrapper}>
-          <Chip label={`${follows} Follows`} size="small" 
+          <Chip
+            label={`${follows || 0} Follows`}
+            size="small"
             sx={{
               backgroundColor: "#000000",
               color: "#ffffff",
@@ -19,9 +20,10 @@ function Card({ album }) {
               fontSize: "14px",
               boxShadow: 1,
               height: "32px",
-              margin:"8px 4px",
+              margin: "8px 4px",
               borderRadius: "24px",
-            }}/>
+            }}
+          />
         </div>
       </div>
       <div className={styles.title}>{title}</div>
