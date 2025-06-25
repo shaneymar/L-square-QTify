@@ -7,9 +7,13 @@ function App() {
     <div>
       <Navbar />
       <Hero />
-      <Section 
+      <Section
         title="Top Albums"
-        apiEndpoint="https://qtify-backend-labs.crio.do/albums/top"
+        fetchUrl="https://qtify-backend-labs.crio.do/albums/top"
+      />
+      <Section
+        title="New Albums"
+        fetchUrl="https://qtify-backend-labs.crio.do/albums/new"
       />
     </div>
   );

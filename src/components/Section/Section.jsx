@@ -1,32 +1,42 @@
+// src/components/Section/Section.jsx
 import React, { useEffect, useState } from "react";
-import styles from "./Section.module.css";
 import Card from "../Card/Card";
+import styles from "./Section.module.css";
 
-function Section({ title, apiEndpoint }) {
+function Section({ title, fetchUrl }) {
   const [albums, setAlbums] = useState([]);
+  const [showAll, setShowAll] = useState(false);
 
- useEffect(() => {
-  fetch(apiEndpoint)
-    .then(res => res.json())
-    .then(data => setAlbums(data))
-    .catch(err => console.error("Error:", err));
-}, [apiEndpoint]);
+  useEffect(() => {
+    const fetchAlbums = async () => {
+      try {
+        const res = await fetch(fetchUrl);
+        if (!res.ok) throw new Error(`HTTP Error ${res.status}`);
+        const data = await res.json();
+        setAlbums(data);
+      } catch (err) {
+        console.error("Error fetching albums:", err.message);
+      }
+    };
 
+    fetchAlbums();
+  }, [fetchUrl]);
+
+  const visibleAlbums = showAll ? albums : albums.slice(0, 5);
 
   return (
     <div className={styles.section}>
       <div className={styles.header}>
-        <h2>{title}</h2>
-        <button className={styles.toggleButton}>Collapse</button>
+        <h3>{title}</h3>
+        {albums.length > 5 && (
+          <button onClick={() => setShowAll(!showAll)} className={styles.toggle}>
+            {showAll ? "Collapse" : "Show All"}
+          </button>
+        )}
       </div>
-      <div className={styles.grid}>
-        {albums.map((album) => (
-          <Card
-            key={album.id}
-            title={album.title}
-            follows={album.follows}
-            image={album.image}
-          />
+      <div className={styles.cardGrid}>
+        {visibleAlbums.map((album) => (
+          <Card key={album.id} album={album} />
         ))}
       </div>
     </div>
